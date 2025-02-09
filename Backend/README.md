@@ -78,8 +78,7 @@ Example:
   "message": "User already exist"
 }
 
-
-# Data Handling
+## Data Handling
 The endpoint uses express-validator to validate the input data.
 If the data is valid, it checks if the user already exists in the database using the userModel.findOne method.
 If the user does not exist, it hashes the password using the userModel.hashPassword method.
@@ -90,3 +89,80 @@ Controller: user.controller.js
 Service: user.service.js
 Model: user.model.js
 Routes: user.routes.js
+
+
+
+
+# User Login Endpoint
+
+## Endpoint: /users/login
+Description
+This endpoint is used to log in an existing user. It validates the input data, checks if the user exists, compares the provided password with the stored hashed password, and returns an authentication token along with the user details.
+
+Method
+POST
+
+Request Body
+The request body should be a JSON object with the following fields:
+
+email: A string that must be a valid email address (required)
+password: A string with a minimum length of 6 characters (required)
+Example:
+{
+  "email": "john.doe@example.com",
+  "password": "password123"
+}
+
+
+
+Response
+Success (200 OK)
+Status Code: 200
+Body: A JSON object containing the authentication token and user details.
+Example:
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "user": {
+    "_id": "60d0fe4f5311236168a109ca",
+    "fullname": {
+      "firstname": "John",
+      "lastname": "Doe"
+    },
+    "email": "john.doe@example.com"
+  }
+}
+
+Validation Errors (400 Bad Request)
+Status Code: 400
+Body: A JSON object containing an array of validation errors.
+Example:
+{
+  "errors": [
+    {
+      "msg": "Invalid Email",
+      "param": "email",
+      "location": "body"
+    },
+    {
+      "msg": "Password must be at least 6 characters long",
+      "param": "password",
+      "location": "body"
+    }
+  ]
+}
+
+
+
+Invalid Credentials (401 Unauthorized)
+Status Code: 401
+Body: A JSON object with a message indicating that the email or password is incorrect.
+Example:
+{
+  "message": "Invalid email or password"
+}
+
+## Data Handling
+The endpoint uses express-validator to validate the input data.
+If the data is valid, it checks if the user exists in the database using the userModel.findOne method.
+If the user exists, it compares the provided password with the stored hashed password using the user.comparePassword method.
+If the password matches, it generates an authentication token using the user.generateAuthToken method and returns the token along with the user details.

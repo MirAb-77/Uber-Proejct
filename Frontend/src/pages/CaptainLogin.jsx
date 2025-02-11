@@ -44,7 +44,7 @@ const CaptainLogin = () => {
             <div> 
             <Link 
             to='/login'
-            className='bg-[#36454F] flex items-center justify-center font-medium text-lg text-white py-3 rounded w-full mt-2'>Sign In As User</Link>
+            className='bg-red-800 flex items-center justify-center font-medium text-lg text-white py-3 rounded w-full mt-2'>Sign In As User</Link>
             </div>
         </div>
     );

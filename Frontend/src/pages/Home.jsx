@@ -19,7 +19,7 @@ const Home = () => {
 
             {/* Content Box */}
             <div className="relative z-10 bg-white text-center p-6 rounded-t-3xl shadow-lg w-full">
-                <h2 className='text-2xl font-bold text-gray-900'>Get Started with Uber</h2>
+                <h2 className='text-[30px] font-bold text-gray-900'>Get Started with Uber</h2>
                 <p className="text-gray-600 mt-1 text-base">Move smarter, faster, and better.</p>
 
                 {/* Action Button */}

@@ -14,7 +14,7 @@ const CaptainSignUp = () => {
         setUserData({
             email: email,
             password: password,
-            userName:
+            fullName:
             {firstName: firstName,
             lastName: lastName
             }
@@ -34,20 +34,20 @@ const CaptainSignUp = () => {
             <form onSubmit={(e) => submitHandler(e)}>
 
             <h3 className='text-medium font-medium ml-2 text-black' >What's Your Name?</h3>
-            <dev className='flex gap-3 mb-6'>
+            <div className='flex gap-3 mb-6'>
             <input required 
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
-            className='bg-gray-200 p-2.5  w-1/2 mt-2 placeholder'
+            className='bg-gray-200 p-2.5  w-full mt-2 placeholder'
             type='text' placeholder='First name' />
 
 
             <input required 
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
-            className='w-1/2 bg-gray-200 p-2 mt-2 placeholder'
+            className='w-full bg-gray-200 p-2 mt-2 placeholder'
             type='text' placeholder='Last name' />
-            </dev>
+            </div>
             
 
             <h3 className='text-medium font-medium ml-2 text-black' >What's Your Email Address?</h3>

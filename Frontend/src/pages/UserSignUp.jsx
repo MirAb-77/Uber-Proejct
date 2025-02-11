@@ -14,7 +14,7 @@ const UserSignUp = () => {
         setUserData({
             email: email,
             password: password,
-            userName:
+            fullName:
             {firstName: firstName,
             lastName: lastName
             }

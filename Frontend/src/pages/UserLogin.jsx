@@ -1,21 +1,47 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { UserDataContent } from '../context/userContext';
+import axios from 'axios';
+
 
 const UserLogin = () => {
 
     const[email, setEmail] = useState('');
     const[password, setPassword] = useState('');
     const[userData, setUserData] = useState({});
+    const{user, setUser} = useContext(UserDataContent);
+    const navigate = useNavigate();
+    
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
-        setUserData({
-            email: email,
-            password: password
-        });
+        
+        try {
+            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/login`, { email, password });
+    
+            if (response.status === 200 && response.data.user) {
+                setUser(response.data.user);
+                localStorage.setItem('token', response.data.token); // ✅ Correct way
+                navigate('/home');
+            } 
+            else {
+                console.error("Unexpected response:", response);
+                alert("Login successful, but user data is missing.");
+            }
+        } catch (error) {
+            if (error.response) {
+                console.error("Error signing in:", error.response.data);
+                alert(error.response.data.message || "Login failed. Please check your credentials.");
+            } else {
+                console.error("Network or server error:", error.message);
+                alert("An unexpected error occurred. Please try again.");
+            }
+        }
+    
         setEmail('');
         setPassword('');
-    }
+    };
+    
 
     return (
         <div className='p-8 flex flex-col justify-between h-[100vh]  bg-black'>

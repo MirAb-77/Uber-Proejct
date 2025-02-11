@@ -1,18 +1,47 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { CaptainDataContext } from '../context/CaptainContext';
+
 
 const CaptainLogin = () => {
 
     const[email, setEmail] = useState('');
     const[password, setPassword] = useState('');
-    const[captainData, setcaptainData] = useState({});
-
-    const submitHandler = (e) => {
+    const{ captain, setCaptain } = React.useContext(CaptainDataContext);
+    const navigate = useNavigate();
+    
+    const submitHandler = async (e) => {
         e.preventDefault();
-        setcaptainData({
+        const captain = {
             email: email,
             password: password
-        });
+        };
+
+        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/captains/login`, captain);
+        try
+        {
+            if (response.status === 200 && response.data.captain) {
+                setCaptain(response.data.captain);
+                localStorage.setItem('token', response.data.token);
+                navigate('/captain-home');
+            } 
+            else {
+                console.error("Unexpected response:", response);
+                alert("Login successful, but captain data is missing.");
+            }
+        } catch (error) {
+            if (error.response) {
+                console.error("Error signing in:", error.response.data);
+                alert(error.response.data.message || "Login failed. Please check your credentials.");
+            }
+            else {
+                console.error("Network or server error:", error.message);
+                alert("An unexpected error occurred. Please try again.");
+            }
+        }
+
         setEmail('');
         setPassword('');
     }

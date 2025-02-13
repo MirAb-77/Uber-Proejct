@@ -57,7 +57,7 @@ const UserLogin = () => {
             className='bg-gray-200 p-3 mb-6 w-full mt-3 placeholder'
              type='email' placeholder='email@example.com' />
 
-            <h3 className='text-medium font-medium ml-2 mt-4 text-white'>What's Your Password?</h3>
+            <h3 className='text-medium font-medium ml-2 text-white'>What's Your Password?</h3>
             <input required 
             value={password}
             onChange={(e) => setPassword(e.target.value)}

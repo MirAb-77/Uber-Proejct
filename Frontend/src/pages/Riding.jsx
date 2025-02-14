@@ -62,7 +62,7 @@ const Riding = () => {
         </div>
 
         {/* Payment Button */}
-        <button className="m-5 text-white bg-gray-900 px-11 py-5 rounded-full font-extrabold text-xl shadow-2xl tracking-wide hover:bg-black transition-all transform hover:scale-110">
+        <button className="m-4 text-white bg-black px-9 py-5 rounded-full font-extrabold text-xl shadow-2xl tracking-wide hover:bg-black transition-all transform hover:scale-110">
   Make The Payment
 </button>
 

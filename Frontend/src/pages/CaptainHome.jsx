@@ -43,14 +43,14 @@ const CaptainHome = () => {
 
 
     return (
-        <div className="h-screen w-screen">
+    <div className="h-screen w-screen">
             <img 
                 className="w-16 absolute top-5 left-5" 
                 src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png" 
                 alt="Uber Logo" 
             />
         <div>
-        <Link to='/home' className='fixed right-2 top-2 h-10 w-10 bg-white flex items-center justify-center rounded-full'>
+        <Link to='/captain-login' className='fixed right-2 top-2 h-10 w-10 bg-white flex items-center justify-center rounded-full'>
         <i className="text-2xl ri-logout-box-r-line"></i>
         </Link>
         </div>

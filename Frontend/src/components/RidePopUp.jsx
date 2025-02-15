@@ -3,10 +3,11 @@ import React, { useState } from 'react';
 const RidePopUp = (props) => {
     const [isClosing, setIsClosing] = useState(false);
 
+    // Function to close the ride popup
     const handleClose = () => {
         setIsClosing(true);
-        setTimeout(() => props.setRidePopupPanel(false), 500); // Wait for animation to complete
-    };
+        setTimeout(() => props.setRidePopupPanel(false), 100); // Wait for animation to complete
+    };    
 
     // Ensure names are not undefined
     const firstName = props.ride?.user?.fullname?.firstname || "";
@@ -14,7 +15,7 @@ const RidePopUp = (props) => {
 
     return (
         <div className={`fixed bottom-0 left-0 w-full bg-white text-black p-6 rounded-t-2xl shadow-xl border-t-4 border-white 
-                        transition-transform duration-500 ${isClosing ? 'translate-y-full' : 'translate-y-0'}`}>
+            transition-transform duration-500 ${isClosing ? 'translate-y-full' : 'translate-y-0'}`}>
             <h5 className='absolute top-5 right-5' onClick={handleClose}>
                 <i className="text-4xl text-gray-700 ri-arrow-down-wide-line"></i>
             </h5>
@@ -25,7 +26,7 @@ const RidePopUp = (props) => {
                     <img className='h-20 w-20 rounded-full object-cover' 
                          src="https://png.pngtree.com/png-clipart/20231028/original/pngtree-beautiful-man-transparent-background-png-image_13446304.png" alt="User" />
                     <h2 className='text-2xl font-semibold text-white'>
-                        Khalid Ijaz - {firstName} {lastName}
+                        Khalid Ijaz - {props.ride?.user?.fullname?.firstname || ""} {props.ride?.user?.fullname?.lastname || ""}
                     </h2>
                 </div>
                 <h5 className='text-2xl font-bold text-white'>2.2 KM</h5>
@@ -57,14 +58,12 @@ const RidePopUp = (props) => {
             </div>
             
             <div className='mt-6 flex flex-col space-y-3'>
-                <button onClick={() =>{
-                props.setConfirmRidePopupPanel(true)
-                }}
-                    className='w-full bg-yellow-500 hover:bg-yellow-400 text-black font-semibold p-3 rounded-lg shadow-md text-xl'>
+                <button onClick={() => {
+                    props.setConfirmRidePopupPanel(true);
+                }} className='w-full bg-yellow-500 hover:bg-yellow-400 text-black font-semibold p-3 rounded-lg shadow-md text-xl'>
                     Accept Ride
                 </button>
-                <button onClick={handleClose} 
-                    className='w-full bg-black hover:bg-gray-800 text-white font-semibold p-3 rounded-lg shadow-md text-xl'>
+                <button onClick={handleClose} className='w-full bg-black hover:bg-gray-800 text-white font-semibold p-3 rounded-lg shadow-md text-xl'>
                     Ignore
                 </button>
             </div>
@@ -73,3 +72,4 @@ const RidePopUp = (props) => {
 };
 
 export default RidePopUp;
+

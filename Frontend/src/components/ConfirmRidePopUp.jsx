@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Link } from 'react-router-dom'
 
 const ConfirmRidePopUp = (props) => {
     const [otp, setOtp] = useState('');
@@ -32,14 +33,14 @@ const ConfirmRidePopUp = (props) => {
 
     return (
         <div>
-            <h5 className="p-0 text-center w-[93%] absolute top-0 cursor-pointer" onClick={() => props.setRidePopupPanel(false)}>
+            <h5 className="p-0 text-center w-[93%] absolute top-0 cursor-pointer" onClick={() => props.setConfirmRidePopupPanel(false)}>
                 <i className="text-4xl text-gray-600 ri-arrow-down-wide-line"></i>
             </h5>
             <h3 className="text-3xl font-semibold mb-5">Confirm this ride to Start</h3>
 
             <div className="flex items-center justify-between p-3 border-2 border-yellow-400 rounded-lg mt-5">
-                <div className="flex items-center gap-5">
-                    <img className="h-32 w-32 rounded-full object-cover" src="https://png.pngtree.com/png-clipart/20231028/original/pngtree-beautiful-man-transparent-background-png-image_13446304.png" alt="User" />
+                <div className="flex items-center gap-3">
+                    <img className="h-28 w-28 rounded-full object-cover" src="https://png.pngtree.com/png-clipart/20231028/original/pngtree-beautiful-man-transparent-background-png-image_13446304.png" alt="User" />
                     <h2 className="text-2xl font-medium text-black">Khalid Ijaz -  {firstName} {lastName}</h2>
                 </div>
                 <h5 className="text-3xl font-bold">2.2 KM</h5>
@@ -47,21 +48,21 @@ const ConfirmRidePopUp = (props) => {
 
             <div className="flex gap-3 justify-between flex-col items-start w-full mt-5">
                 <div className="w-full space-y-5">
-                    <div className="flex items-center gap-4 p-4 bg-gray-200 rounded-lg shadow-sm w-full">
+                    <div className="flex items-center gap-3 p-3 bg-gray-200 rounded-lg shadow-sm w-full">
                         <i className="ri-map-pin-user-fill text-black text-4xl"></i>
                         <div>
                             <h3 className="text-xl font-semibold text-black">Pickup Location</h3>
                             <p className="text-lg text-gray-700">{props.ride?.pickup || "Unknown"}</p>
                         </div>
                     </div>
-                    <div className="flex items-center gap-4 p-4 bg-gray-200 rounded-lg shadow-sm w-full">
+                    <div className="flex items-center gap-3 p-3 bg-gray-200 rounded-lg shadow-sm w-full">
                         <i className="ri-map-pin-2-fill text-black text-4xl"></i>
                         <div>
                             <h3 className="text-xl font-semibold text-black">Destination</h3>
                             <p className="text-lg text-gray-700">{props.ride?.destination || "Unknown"}</p>
                         </div>
                     </div>
-                    <div className="flex items-center gap-4 p-4 bg-gray-200 rounded-lg shadow-sm w-full">
+                    <div className="flex items-center gap-3 p-3 bg-gray-200 rounded-lg shadow-sm w-full">
                         <i className="ri-currency-line text-black text-4xl"></i>
                         <div>
                             <h3 className="text-xl font-semibold text-black">Fare</h3>
@@ -71,17 +72,33 @@ const ConfirmRidePopUp = (props) => {
                 </div>
 
                 <div className="mt-6 w-full">
-                    <form onSubmit={submitHandler}>
-                    <button className='w-full  text-xl flex items-center justify-center gap-3 bg-green-700 text-white border-2 border-green-600 font-semibold p-4 rounded-lg shadow-md hover:bg-green-100 transition duration-300'>
-                       <i className="ri-check-line text-2xl"></i> Confirm Ride
-                    </button>
-                    <button onClick={() => {
-            props.setConfirmRidePopupPanel(false)
-            props.setRidePopupPanel(false)
-        }} 
-        className='w-full mt-3 text-xl flex items-center justify-center gap-3 bg-red-600 text-white font-semibold p-4 rounded-lg shadow-md hover:bg-red-700 transition duration-300'>
-            <i className="ri-close-line text-2xl"></i> Cancel Ride
-        </button>
+                    <form onSubmit={submitHandler} className="space-y-4">
+                      {/* OTP Input Field */}
+                      <input 
+                       value={otp} 
+                       onChange={(e) => setOtp(e.target.value)} 
+                       type="text" 
+                       className="bg-[#eee] px-6 py-4 font-mono text-lg rounded-lg w-full" 
+                       placeholder="Enter OTP" 
+                        />
+
+                        {/* Confirm Ride Button */}
+                       <Link 
+                         to="/captain-ride" 
+                         className="w-full text-xl flex items-center justify-center gap-1 bg-green-700 text-white border-2 border-green-600 font-semibold p-2 rounded-lg shadow-md hover:bg-green-100 transition duration-300"
+                         >
+                          <i className="ri-check-line text-2xl"></i> Confirm Ride
+                        </Link>
+
+                           {/* Cancel Ride Button */}
+                        <button 
+                          onClick={() => {
+                          props.setConfirmRidePopupPanel(false);  
+                          }} 
+                          className="w-full text-xl flex items-center justify-center gap-1 bg-red-600 text-white font-semibold p-2 rounded-lg shadow-md hover:bg-red-700 transition duration-300"
+                           >
+                         <i className="ri-close-line text-2xl"></i> Cancel Ride
+                        </button>
                     </form>
                 </div>
             </div>

@@ -20,7 +20,9 @@ const VehiclePanel = (props) => {
             {/* Uber-Go Ride */}
             <div 
                 onClick={() => {
-                props.setConfirmRidePanel(true);}}
+                props.setConfirmRidePanel(true)
+                props.selectVehicle('car')
+            }}
                 className="flex border-2 hover:border-black bg-white rounded-xl p-6 items-center justify-between w-full">
                 
                 {/* Left Side: Car Image & Details */}
@@ -45,14 +47,17 @@ const VehiclePanel = (props) => {
 
                 {/* Right Side: Fare */}
                 <h2 className="text-3xl font-extrabold text-black drop-shadow-lg">
-                    ₨ 500
+                    ${props.fare.car}
                 </h2>
             </div>
 
             {/* Motor-Bike Ride */}
             <div 
                 onClick={() => {
-                props.setConfirmRidePanel(true);}}className="flex border-2 hover:border-black bg-white rounded-xl p-6 items-center justify-between w-full mt-4">
+                props.setConfirmRidePanel(true)
+                props.selectVehicle('moto')
+                }}
+                className="flex border-2 hover:border-black bg-white rounded-xl p-6 items-center justify-between w-full mt-4">
                 
                 {/* Left Side: Bike Image & Details */}
                 <div className="flex items-center gap-3">
@@ -76,14 +81,15 @@ const VehiclePanel = (props) => {
 
                 {/* Right Side: Fare */}
                 <h2 className="text-3xl font-extrabold text-black drop-shadow-lg">
-                    ₨ 70
+                    ${props.fare.moto}
                 </h2>
             </div>
 
             {/* Auto Rickshaw Ride */}
             <div 
                 onClick={() => {
-                    props.setConfirmRidePanel(true);
+                    props.setConfirmRidePanel(true)
+                    props.selectVehicle('auto')
                 }}
                 className="flex border-2 hover:border-black bg-white rounded-xl p-6 items-center justify-between w-full mt-4">
                 
@@ -109,7 +115,7 @@ const VehiclePanel = (props) => {
 
                 {/* Right Side: Fare */}
                 <h2 className="text-3xl font-extrabold text-black drop-shadow-lg">
-                    ₨ 180
+                    ${props.fare.auto}
                 </h2>
             </div>
         </div>

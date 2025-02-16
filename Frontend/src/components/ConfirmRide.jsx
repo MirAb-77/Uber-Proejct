@@ -3,7 +3,7 @@ import React, { useState }from 'react';
 const ConfirmRide = (props) => {
   return (
     <div>
-      <h5 className="p-1 text-center w-[93%] absolute top-0 cursor-pointer"
+      <h5 className="p-1 text-center w-[90%] absolute top-0 cursor-pointer"
           onClick={() => props.setConfirmRidePanel(false)}>
           <i className="text-3xl text-gray-400 ri-arrow-down-wide-line "></i>
       </h5>
@@ -17,7 +17,7 @@ const ConfirmRide = (props) => {
             <div>
                 <h3 className="text-2xl font-medium mb-1">Lahore University of Management Sciences</h3>
                 <p className="text-base bg-grey-600 ">
-                   DHA, Lahore Cantt, Lahore
+                  {props.pickup}
                 </p>
             </div>
           </div>
@@ -26,16 +26,17 @@ const ConfirmRide = (props) => {
             <div>
                 <h3 className="text-2xl font-medium mb-1">House-64/Block-3, Makkah Road</h3>
                 <p className="text-base bg-grey-600">
-                   Karim Park, Lahore
+                  {props.destination}
                 </p>
             </div>
           </div>
           <div className="flex items-center gap-5 p-5 border-b-2">
             <i className="text-xl ri-cash-line"></i>
             <div>
-                <h3 className="text-2xl font-medium mb-1">Rs. 900</h3>
+                <h3 className="text-2xl font-medium mb-1">{props.fare[props.vehicleType]}</h3>
                 <p className="text-base bg-grey-600">
-                   Method: Cash
+                 Method: Cash
+                   
                 </p>
             </div>
           </div>
@@ -46,6 +47,7 @@ const ConfirmRide = (props) => {
       onClick={() => {
         props.setVehicleFound(true);
         props.setConfirmRidePanel(false);
+        props.createRide()
       }}
       
       className="w-full bg-red-800 text-white text-xl font-semibold p-4 rounded-lg pb-3">Confirm</button>

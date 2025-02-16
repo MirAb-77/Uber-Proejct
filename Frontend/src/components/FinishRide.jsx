@@ -17,7 +17,7 @@ const FinishRide = (props) => {
       };
 
     return (
-        <div className="relative bg-yellow-400 text-gray-900 p-4 rounded-xl shadow-lg max-w-lg mx-auto">
+        <div className="relative bg-yellow-400 text-gray-900 p-4 rounded-xl  max-w-lg mx-auto">
   <h5
     className="p-0 text-center w-[93%] absolute top-3 right-3 cursor-pointer"
     onClick={() => props.setFinishRidePanel(false)}

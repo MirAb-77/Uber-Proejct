@@ -48,7 +48,7 @@ const CaptainRiding = () => {
       </div>
 
       {/* Ride Info & Payment Section */}
-      <div className="h-1/5 p-5 flex items-center justify-between bg-gray-200 relative" onClick={() => {
+      <div className="h-1/5 p-5 flex items-center justify-between bg-yellow-400 relative" onClick={() => {
                     setFinishRidePanel(true)
                 }}>
         <h5 className='absolute left-1/2 transform -translate-x-1/2 top-0'>

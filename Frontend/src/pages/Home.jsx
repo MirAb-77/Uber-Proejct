@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -9,6 +9,12 @@ import VehiclePanel from "../components/VehiclePanel";
 import ConfirmRide from "../components/ConfirmRide";
 import LookForDriver from "../components/LookForDriver";
 import WaitingForDriver from "../components/WaitForDriver";
+import { SocketContext } from '../context/SocketContext';
+import { useContext } from 'react';
+import { UserDataContent } from '../context/UserContext';
+
+
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
     const [pickup, setPickup] = useState('');
@@ -17,7 +23,7 @@ const Home = () => {
     const [pickupSuggestions, setPickupSuggestions] = useState([]);
     const [destinationSuggestions, setDestinationSuggestions] = useState([]);
     const [activeField, setActiveField] = useState(null); // 'pickup' or 'destination'
-    const [ fare, setFare ] = useState({})
+    const [ fare, setFare ] = useState('')
     const [ ride, setRide ] = useState(null)
     const [ vehicleType, setVehicleType ] = useState(null)
 
@@ -35,6 +41,33 @@ const Home = () => {
 
     const waitingForDriverRef = useRef(null);
     const [waitingForDriver, setWaitingForDriver] = useState(false);
+
+
+    const { socket } = useContext(SocketContext)
+    const { user } = useContext(UserDataContent);
+
+
+    useEffect(() => {
+        console.log(user)
+        socket.emit("join", { userType: "user", userId: user._id })
+    }, [ user ])
+
+    socket.on('ride-confirmed', ride => {
+
+
+        setVehicleFound(false)
+        setWaitingForDriver(true)
+        setRide(ride)
+    })
+
+    socket.on('ride-started', ride => {
+        console.log("ride")
+        setWaitingForDriver(false)
+        navigate('/riding', { state: { ride } }) // Updated navigate to include ride data
+    })
+
+
+
 
     const handlePickupChange = async (e) => {
         const input = e.target.value;
@@ -207,7 +240,7 @@ const Home = () => {
             <div className="h-screen w-screen">
                 <img 
                     className="h-screen w-screen object-cover" 
-                    src="https://thepointsguy.global.ssl.fastly.net/us/originals/2019/01/Uber-routing-Lahore.jpg" 
+                    src="https://miro.medium.com/v2/resize:fit:1400/0*gwMx05pqII5hbfmX.gif" 
                     alt="Uber Routing" 
                 />
             </div>
@@ -293,7 +326,13 @@ const Home = () => {
             </div>
 
             <div ref={vehicleFoundRef} className="fixed z-10 bottom-0 px-2 py-9 w-full shadow-lg bg-white translate-y-full text-black border-2 border-gray-300 rounded-xl">
-                <LookForDriver setVehicleFound={setVehicleFound} />
+                <LookForDriver
+                 pickup={pickup}
+                 destination={destination}
+                 fare={fare}
+                 vehicleType={vehicleType}
+                 createRide={createRide}
+                 setVehicleFound={setVehicleFound} />
             </div>
 
             <div  ref={waitingForDriverRef} className="fixed z-10 bottom-0 px-2 py-9 w-full shadow-lg bg-white  text-black border-2 border-gray-300 rounded-xl">

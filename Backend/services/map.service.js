@@ -1,4 +1,5 @@
 const axios = require('axios');
+const captainModel = require('../models/captain.model');
 
 const mapService = {
     getAddressCoordinate: async (address) => {
@@ -10,7 +11,7 @@ const mapService = {
             if (response.data.status === 'OK') {
                 const location = response.data.results[0].geometry.location;
                 return {
-                    lat: location.lat,
+                    ltd: location.lat,
                     lng: location.lng
                 };
             } else {
@@ -50,10 +51,10 @@ const mapService = {
         if (!input) {
             throw new Error('Input is required');
         }
-    
+
         const apiKey = process.env.GOOGLE_MAPS_API;
         const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${encodeURIComponent(input)}&key=${apiKey}`;
-    
+
         try {
             const response = await axios.get(url);
             if (response.data.status === 'OK') {
@@ -65,7 +66,28 @@ const mapService = {
             console.error(err);
             throw err;
         }
+    },
+
+    getCaptainsInTheRadius: async (lat, lng, radius) => {  // Rename ltd to lat for clarity
+        const captains = await captainModel.find({
+            location: {
+                $geoWithin: {
+                    $centerSphere: [[lng, lat], radius / 6371]  // Correct order: [longitude, latitude]
+                }
+            }
+        });
+    
+        if (!captains.length) {
+            console.warn(`⚠️ No captains found within ${radius} km of (${lat}, ${lng})`);
+            return []; // Return empty array instead of null
+        }
+    
+        console.log(`✅ Found ${captains.length} captains within ${radius} km.`);
+        return captains;
     }
+    
+    
+    
 };
 
 module.exports = mapService;

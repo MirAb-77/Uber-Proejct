@@ -15,8 +15,8 @@ const ConfirmRide = (props) => {
           <div className="flex items-center gap-5 p-5 border-b-2">
             <i className="text-3xl ri-map-pin-2-line"></i>
             <div>
-                <h3 className="text-2xl font-medium mb-1">Lahore University of Management Sciences</h3>
-                <p className="text-base bg-grey-600 ">
+                <h3 className="text-2xl font-medium mb-1">Pickup</h3>
+                <p className="text-medium bg-grey-600 ">
                   {props.pickup}
                 </p>
             </div>
@@ -24,8 +24,8 @@ const ConfirmRide = (props) => {
           <div className="flex items-center gap-5 p-5 border-b-2">
             <i className="text-xl ri-map-pin-fill"></i>
             <div>
-                <h3 className="text-2xl font-medium mb-1">House-64/Block-3, Makkah Road</h3>
-                <p className="text-base bg-grey-600">
+                <h3 className="text-2xl font-medium mb-1">Destination</h3>
+                <p className="text-medium bg-grey-600">
                   {props.destination}
                 </p>
             </div>
@@ -34,7 +34,7 @@ const ConfirmRide = (props) => {
             <i className="text-xl ri-cash-line"></i>
             <div>
                 <h3 className="text-2xl font-medium mb-1">{props.fare[props.vehicleType]}</h3>
-                <p className="text-base bg-grey-600">
+                <p className="text-medium bg-grey-600">
                  Method: Cash
                    
                 </p>

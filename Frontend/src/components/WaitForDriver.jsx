@@ -20,7 +20,7 @@ const WaitingForDriver = (props) => {
             <h4 className="text-3xl font-bold -mt-1">
                 MP 04 AB40
             </h4>
-            <p classN ame="text-base text-grey-600 font-italic">
+            <p className="text-base text-grey-600 font-italic">
                 Hyundai Clantra
             </p>
         </div>

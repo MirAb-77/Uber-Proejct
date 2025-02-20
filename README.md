@@ -1,9 +1,3 @@
-Here's a **highly detailed and structured README** for your **Uber-Video project**, covering **frontend & backend setup, dependencies, technologies, troubleshooting, and complete project usage**. 🚀  
-
----
-
-# **🚖 Uber-Video Project - Complete Documentation**  
-
 ## **📌 Overview**
 **Uber-Video** is a ride-hailing application that enables users to book rides, track drivers in real time, and manage trips efficiently. It consists of:  
 
@@ -245,4 +239,4 @@ This guide provides a **step-by-step setup** for the Uber-like system.
 ✔ Implement **CI/CD pipelines**.  
 ✔ Enhance **security & performance**.  
 
-**Need help?** **Ask me!** 🚀😊
+**Need help?** **Ask me!** 

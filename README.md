@@ -1,5 +1,5 @@
 ## **📌 Overview**
-**Uber-Video** is a ride-hailing application that enables users to book rides, track drivers in real time, and manage trips efficiently. It consists of:  
+**Rydex** is a ride-hailing application that enables users to book rides, track drivers in real time, and manage trips efficiently. It consists of:  
 
 ✔ **Frontend (React.js/Next.js)** – Manages user interactions & UI.  
 ✔ **Backend (Node.js/Express/Python)** – Handles ride requests, authentication, trip matching, and real-time updates.  
